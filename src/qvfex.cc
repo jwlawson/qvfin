@@ -82,6 +82,7 @@ int main(int argc, char* argv[]) {
 				return 2;
 		}
 	}
+	int res;
 	if(input) {
 		std::ifstream f_in;
 		f_in.open(ifile);
@@ -96,9 +97,14 @@ int main(int argc, char* argv[]) {
 				std::cout << "Error opening file: " << ofile << std::endl;
 				return 1;
 			}
-			return run_both(f_in, f_out);
+			res = run_both(f_in, f_out);
+			f_in.close();
+			f_out.close();
+			return res;
 		}
-		return run_in(f_in);
+		res = run_in(f_in);
+		f_in.close();
+		return res;
 	}
 	if(output) {
 		std::ofstream f_out;
@@ -107,7 +113,9 @@ int main(int argc, char* argv[]) {
 			std::cout << "Error opening file: " << ofile << std::endl;
 			return 1;
 		}
-		return run_out(f_out);
+		res = run_out(f_out);
+		f_out.close();
+		return res;
 	}
 	return run();
 }
