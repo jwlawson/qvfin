@@ -24,12 +24,12 @@ OBJ_DIR = $(BASE_DIR)/build
 
 # define any directories containing header files other than /usr/include
 # -I/home/newhall/include 
-INCLUDES = -I$(BASE_DIR)/include -I$(BASE_DIR)/src -I$(BASE_DIR)/lib/include
+INCLUDES = -I$(BASE_DIR)/include -I$(HOME)/include
 
 # define library paths in addition to /usr/lib
 #   if I wanted to include libraries not in /usr/lib I'd specify
 #   their path using -Lpath, something like: -L/home/newhall/lib
-LFLAGS = -L$(BASE_DIR)/lib -L$(BASE_DIR)/lib
+LFLAGS = -L$(BASE_DIR)/lib -L$(HOME)/lib
 
 # define any libraries to link into executable:
 #   if I want to link in libraries (libx.so or libx.a) I use the -llibname 
@@ -53,7 +53,7 @@ _OBJS = $(SRCS:.cc=.o)
 OBJS = $(patsubst $(SRC_DIR)/%,$(OBJ_DIR)/%,$(_OBJS))
 
 # define the executable file 
-MAIN = qvfin
+MAIN = qvfex
 
 #
 # The following part of the makefile is generic; it can be used to
@@ -67,7 +67,6 @@ all:   $(MAIN)
 
 $(MAIN): $(OBJS)
 	$(CXX) $(CXXFLAGS) $(OPT) $(INCLUDES) -o $(MAIN) $(OBJS) $(LFLAGS) $(LIBS)
-
 
 # this is a suffix replacement rule for building .o's from .c's
 # it uses automatic variables $<: the name of the prerequisite of
