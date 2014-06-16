@@ -34,7 +34,7 @@ int run_both(std::istream& in, std::ostream& out) {
 			Iter iter(m);
 			while(iter.has_next()){
 				Matrix n = iter.next();
-				if(chk.is_finite(n)){
+				if(n.zero_row() == -1 && chk.is_finite(n)){
 					out << n << std::endl;
 				}
 			}

@@ -1,0 +1,26 @@
+#!/bin/bash
+
+function ext {
+	size=$1
+	shift
+	cmd="$@"
+	if [ "$size" -eq 2 ];
+	then
+		tmp="echo \"{ { 0 } }\" | qvfex | qvtrim -e ${cmd}"
+		eval $tmp
+	else
+		tmp="| qvfex | qvtrim -e  ${cmd}"
+		s=$(($size-1))
+		ext ${s} $tmp
+	fi
+}
+
+size=$1
+echo "Finding matrices of size ${size}"
+if [ "${size}" -eq 2 ];
+then
+	echo `echo \"{ { 0 } }\" | qvfex | qvtrim -e`
+else
+	ext ${size} ""
+fi
+

@@ -11,5 +11,4 @@ lib/
 callgrind.*
 core.*
 cachegrind.*
-qvfin
 
