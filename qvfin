@@ -1,13 +1,13 @@
 #!/bin/bash
 
 function ext {
-	size=$1
+	size="$1"
 	shift
 	cmd="$@"
 	if [ "$size" -eq 2 ];
 	then
 		tmp="echo \"{ { 0 } }\" | qvfex | qvtrim -e ${cmd}"
-		eval $tmp
+		echo $tmp
 	else
 		tmp="| qvfex | qvtrim -e  ${cmd}"
 		s=$(($size-1))
@@ -15,12 +15,15 @@ function ext {
 	fi
 }
 
-size=$1
-echo "Finding matrices of size ${size}"
+size="$1"
+opt="$2"
+tmp=""
 if [ "${size}" -eq 2 ];
 then
-	echo `echo \"{ { 0 } }\" | qvfex | qvtrim -e`
+	tmp="echo \"{ { 0 } }\" | qvfex | qvtrim -e"
 else
-	ext ${size} ""
+	tmp=`ext ${size} ""`
 fi
+cmd="${tmp} ${opt}"
+eval ${cmd}
 
