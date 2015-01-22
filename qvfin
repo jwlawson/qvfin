@@ -1,4 +1,6 @@
 #!/bin/bash
+# Finds all mutation-finite quivers of a certain size.
+# See README for usage information.
 
 function ext {
 	size="$1"
