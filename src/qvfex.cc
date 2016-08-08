@@ -42,10 +42,9 @@ int run_both(std::istream& in, std::ostream& out) {
 	std::string str;
 	while(std::getline(in, str)) {
 		if(str[0] == '{') {
-			Matrix m(str);
-			Iter iter(m);
+			Iter iter{ cluster::EquivQuiverMatrix{str} };
 			while(iter.has_next()){
-				Matrix n = iter.next();
+				Matrix const& n = iter.next();
 				if(n.zero_row() == -1 && chk.is_finite(n)){
 					out << n << std::endl;
 				}
